@@ -95,7 +95,7 @@ def connect_server(server, username, startpage, sleep_func=time.sleep,
             break
         except Exception, e:
             last_exc = e
-            print "Exception occured, retrying in %ds: %s" % (interval, e)
+            print "Exception occurred, retrying in %ds: %s" % (interval, e)
             sleep_func(interval)
     else:
         print "Failed to open page %s" % urlvars['page']
