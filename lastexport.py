@@ -46,7 +46,7 @@ def get_options(parser):
         infotype = "bannedtracks"
     else:
         infotype = "recenttracks"
-         
+
     return options.username, options.outfile, options.startpage, options.server, infotype, options.tracksperday
 
 def connect_server(server, username, startpage, sleep_func=time.sleep, tracktype='recenttracks'):
@@ -132,26 +132,26 @@ def parse_track(trackelement):
 
     trackname = trackelement.find('name').text
     trackmbid = trackelement.find('mbid').text
-    
+
     delay = randint(3, 200)
     time = randint(160, 480)
     tracknum = randint(1, 8)
-    
-    output = [artistname, albumname, trackname, str(tracknum), str(time), 'L', str(date), '']
-            
+
     global counter, date, day, trackdict
-    
+
+    output = [artistname, albumname, trackname, str(tracknum), str(time), 'L', str(date), '']
+
     if counter >= tracksperday:
         counter = 0
-        date = date - day   
+        date = date - day
     else:
         counter = counter + 1
         date = date - time
-        
+
     for i, v in enumerate(output):
         if v is None:
             output[i] = ''
-            
+
     with open(outfile, 'a') as outfileobj:
         outfileobj.write(("\t".join(output) + "\r\n").encode('utf-8'))
     return output
@@ -187,7 +187,7 @@ def main(server, username, startpage, outfile, infotype='recenttracks', trackspe
     trackdict = dict()
     global tracksperday
     tracksperday = tracksperdayarg
-    
+
     page = startpage  # for case of exception
     totalpages = -1  # ditto
     n = 0
